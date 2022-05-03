@@ -1,3 +1,4 @@
+/*
 // a continuación se desarrolla un sistema de ingreso a la plataforma para usuarios registrados y 
 // nuevos usuarios con un algoritmo calculador de precio * horas de trekking 
 
@@ -21,11 +22,11 @@ if(saludoBienvenida == "si" || saludoBienvenida == "Si") {
     while( !existeUsuario(nombreUsuarioRegistrado) ) {
         nombreUsuarioRegistrado = prompt("Ingresá tu nombre de usuario");
     }
-
+    
     alert(`Hola ${nombreUsuarioRegistrado}\n¡Esperamos que hoy tengas muchas ganas de caminar!` );
-
+    
 }  else if(saludoBienvenida == "no" || saludoBienvenida == "No") {
-
+    
     while(nombreNuevoUsuario == "") {
         nombreNuevoUsuario = prompt("Por favor ingresá un nombre de usuario");
         if(existeUsuario (nombreNuevoUsuario) ) {
@@ -33,7 +34,7 @@ if(saludoBienvenida == "si" || saludoBienvenida == "Si") {
             nombreNuevoUsuario = "";
         }
     }
-
+    
     while(clave == "") {
         clave = prompt("Por favor ingresa una contraseña de 8 dígitos como mínimo");
         if(clave.length < 8) {
@@ -62,6 +63,7 @@ let precioHora = 50; //en usd
 
 let opcion = parseInt(prompt(preciosTrekking (precioHora)));  
 
+
 switch (opcion) {
     case 1:
         alert("Tu trekking seleccionado es para Cerro Campanario");
@@ -73,3 +75,43 @@ switch (opcion) {
         alert("Tu trekking seleccionado es para Cerro Lopez");
         break;
 } 
+*/ 
+
+// Array para sumar el seguro Assist Card de acuerdo a las variantes de lugar y precio respectivo
+
+class Trekking {
+    constructor(lugar, precio) {
+        this.lugar     = lugar.toUpperCase ();
+        this.precio    = parseFloat (precio);
+    }
+    
+    sumaAssistCard (seguro) {
+        this.precio = this.precio + 2500;
+    }
+}
+    
+const trekkings = [];
+
+trekkings.push(new Trekking ("Refugio Frey", "7000"));
+trekkings.push(new Trekking ("Refugio Laguna Negra", "12000"));
+trekkings.push(new Trekking ("Refugio Otto Meiling", "10000"));
+
+for (const trekking of trekkings) {
+    trekking.sumaAssistCard();
+}
+
+console.log(trekkings);
+
+// Array de ingreso de integrantes para un trekking por cupo
+
+const integrantes = [];
+let cantidadIntegrantes = 5;
+
+do {
+    let ingresoIntegrante = prompt("Ingresá nombre y apellido");
+    integrantes.push(ingresoIntegrante.toUpperCase());
+    console.log(`Quedan ${cantidadIntegrantes - integrantes.length} cupos disponibles`);
+
+}while(integrantes.length != cantidadIntegrantes)
+
+alert(`Los integrantes del trekking son:\n${integrantes.join("\n")}\nYa no tenemos más cupo para este trekking`);

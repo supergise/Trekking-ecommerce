@@ -1,4 +1,6 @@
-/*
+/* // ENTREGAS ANTERIORES 
+
+
 // a continuación se desarrolla un sistema de ingreso a la plataforma para usuarios registrados y 
 // nuevos usuarios con un algoritmo calculador de precio * horas de trekking 
 
@@ -77,32 +79,73 @@ switch (opcion) {
 } 
 */ 
 
-// Array para sumar el seguro Assist Card de acuerdo a las variantes de lugar y precio respectivo
+
+// Array para sumar el seguro Assist Card a cada uno de los trekkings:
+
 
 class Trekking {
-    constructor(lugar, precio) {
-        this.lugar     = lugar.toUpperCase ();
-        this.precio    = parseFloat (precio);
+    constructor(lugar, precio, kilometros) {
+        this.lugar  = lugar.toUpperCase ();
+        this.precio = parseFloat (precio);
+        this.kilometros = parseFloat (kilometros); 
     }
     
     sumaAssistCard (seguro) {
         this.precio = this.precio + 2500;
     }
 }
-    
+
 const trekkings = [];
 
-trekkings.push(new Trekking ("Refugio Frey", "7000"));
-trekkings.push(new Trekking ("Refugio Laguna Negra", "12000"));
-trekkings.push(new Trekking ("Refugio Otto Meiling", "10000"));
+trekkings.push(new Trekking ("Refugio Frey", "10000", "10"));
+trekkings.push(new Trekking ("Refugio Laguna Negra", "15000", "14" ));
+trekkings.push(new Trekking ("Refugio Otto Meiling", "12000", "13"));
+trekkings.push(new Trekking ("Refugio Cerro Lopez", "7000", "4"));
 
 for (const trekking of trekkings) {
     trekking.sumaAssistCard();
 }
 
-console.log(trekkings);
 
-// Array de ingreso de integrantes para un trekking por cupo
+// Orden de precios de Trekking de manera ascendente:
+
+
+trekkings.sort ((a, b) => {
+    if (a.precio > b.precio) {
+        return 1;
+    }
+    if (a.precio < b.precio) {
+        return -1;
+    }
+    return 0;
+}) 
+
+for (const trekking of trekkings) {
+    console.log(trekking);
+}
+
+
+// Calculo del monto total del Trekking:
+
+
+const montoTotalTrekking = trekkings.reduce((acumulador,elemento) => acumulador + elemento.precio, 0);
+
+console.log("El monto total de los trekkings es:\n$" + montoTotalTrekking );
+
+
+// Busqueda del trekking más económico
+
+
+
+const trekkingPrecios = trekkings.map((elemento) => elemento.precio);
+
+console.log(trekkingPrecios);
+
+console.log("El trekking más económico es:\n" + Math.min (...trekkingPrecios));
+
+
+// Array de ingreso de integrantes para un trekking hasta llegar a 5 personas cupo máximo
+
 
 const integrantes = [];
 let cantidadIntegrantes = 5;

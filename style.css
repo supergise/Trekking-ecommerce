@@ -1,0 +1,63 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box; 
+}
+
+body {
+    font-family: "Nunito", sans-serif;
+    color: #535252; 
+}
+
+.header {
+    grid-area: header; 
+}
+
+ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 20px 0px 20px 0px;
+}
+
+nav ul li {
+    list-style: none;
+}
+
+.nav-center-section a {
+    text-decoration: none;
+    color: #9b9b20; 
+    font-size: 1rem;
+}
+
+h1 {
+    width: 100%;
+    text-align: center;
+    color: #324e56;
+    padding: 50px 0px 50px 0px;
+    font-weight: 400;
+}
+
+p {
+    text-align: center;
+    padding: 10px 0px;
+}
+
+.newsletter {
+    grid-area: newsletter;
+    text-align: center;
+}
+
+.newsletter h3 {
+    font-weight: 100;
+    padding: 10px;
+}
+
+.contacto {
+    grid-area: contacto; 
+    text-align: center;
+    font-size: 1rem;
+    color:rgb(84, 83, 83);
+    padding: 50px;
+}

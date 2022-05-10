@@ -1,160 +1,112 @@
-/* // ENTREGAS ANTERIORES 
+// Manipulación de DOM y Eventos
 
-
-// a continuación se desarrolla un sistema de ingreso a la plataforma para usuarios registrados y 
-// nuevos usuarios con un algoritmo calculador de precio * horas de trekking 
-
-let saludoBienvenida = prompt("¡Bienvenido a Patagonia Trekking!\n¿Ya te registraste en nuestra web? si/no");
-let nombreRegistrado1 = "Enrique";
-let nombreRegistrado2 = "Alberto";
-let nombreUsuarioRegistrado = "";
-let nombreNuevoUsuario = "";
-let clave = "";
-
-function existeUsuario (usuario) {
-    if (usuario === nombreRegistrado1 || usuario === nombreRegistrado2) {
-        return true;
+const salidas = [
+    {
+        id: 1,
+        nombre: "Refugio Frey",
+        precio: 15000,
+        stock: 5,
+        imagen: "./pictures/refugiofrey.jpg"
+    },
+    {
+        id: 2,
+        nombre: "Refugio Laguna Negra",
+        precio: 18000,
+        stock: 3,
+        imagen: "./pictures/refugiolaguna.jpg"
+    },
+    {
+        id: 3,
+        nombre: "Refugio Lopez",
+        precio: 10000,
+        stock: 1,
+        imagen: "./pictures/refugiolopez.jpg"
+    },
+    {
+        id: 4,
+        nombre: "Refugio Otto Meiling",
+        precio: 19000,
+        stock: 1,
+        imagen: "./pictures/refugiootto.jpg"
     }
-    else {
-        return false;
-    }
-}
+];
 
-if(saludoBienvenida == "si" || saludoBienvenida == "Si") {
-    while( !existeUsuario(nombreUsuarioRegistrado) ) {
-        nombreUsuarioRegistrado = prompt("Ingresá tu nombre de usuario");
-    }
-    
-    alert(`Hola ${nombreUsuarioRegistrado}\n¡Esperamos que hoy tengas muchas ganas de caminar!` );
-    
-}  else if(saludoBienvenida == "no" || saludoBienvenida == "No") {
-    
-    while(nombreNuevoUsuario == "") {
-        nombreNuevoUsuario = prompt("Por favor ingresá un nombre de usuario");
-        if(existeUsuario (nombreNuevoUsuario) ) {
-            alert("El nombre de usuario ingresado ya está en uso. Por favor elija uno nuevo");
-            nombreNuevoUsuario = "";
-        }
-    }
-    
-    while(clave == "") {
-        clave = prompt("Por favor ingresa una contraseña de 8 dígitos como mínimo");
-        if(clave.length < 8) {
-            alert("Tu contraseña no tiene 8 dígitos. Por favor intentá de nuevo");
-            clave = "";
-        } else {
-            alert(`Hola ${nombreNuevoUsuario} ¡Ya fuiste dado de alta en el sistema!`);
-        }   
-    }
-} else {
-    window.location.reload ();
-}
+let titulo = document.createElement("h3");
+titulo.innerText = "Estos son nuestros próximos Trekkings";
+document.getElementById("lugares").appendChild(titulo);
 
-alert("A continuación te mostramos nuestra lista de precios");
-
-function preciosTrekking (precioHora) {
-    let listaPrecios = ""; 
-    for (i = 0; i < 3; i++) {
-        listaPrecios += `El trekking ${i+1} tiene una duración de ${(i+1)*120} minutos y un valor de USD ${(i+1)*2*precioHora}\n`;
-    }
-    listaPrecios += "¡Eligí una opción!";
-    return listaPrecios;
-}
-
-let precioHora = 50; //en usd
-
-let opcion = parseInt(prompt(preciosTrekking (precioHora)));  
-
-
-switch (opcion) {
-    case 1:
-        alert("Tu trekking seleccionado es para Cerro Campanario");
-        break;
-    case 2:
-        alert("Tu trekking seleccionado es para Cerro Frey");
-        break;
-    case 3:
-        alert("Tu trekking seleccionado es para Cerro Lopez");
-        break;
+let select = document.createElement("select");
+select.className = "lugaresTrekking";
+select.onchange = (i) => {
+    document.getElementById("imagenElegida").replaceChildren();
+    let imagen = document.createElement("img");
+    imagen.src = i.target.value;
+    document.getElementById("imagenElegida").append(imagen);
 } 
-*/ 
+select.innerHTML += `<option>Seleccione una opcion</option>`;
+for (let index = 0; index < salidas.length; index++) {
+    select.innerHTML += `<option value="${salidas[index].imagen}">${salidas[index].nombre}</option>`;
+}
+document.getElementById("lugares").appendChild(select);
 
+const contenedor = document.getElementById("salidas");
+const tablaCarrito = document.getElementById("tablaCarrito");
+const carrito = [];
 
-// Array para sumar el seguro Assist Card a cada uno de los trekkings:
+const getCard = (item) => {
+    return (
+        `
+        <div class="card" style="width: 20rem;">
+            <img src="${item.imagen}" class="card-img-top" alt="${item.nombre}">
+            <div class="card-body">
+                <h5 class="card-title">${item.nombre}</h5>
+                <p class="card-text">$${item.precio}</p>
+                <p class="card-text">Cupos disponibles: ${item.stock}</p>
+                <button onclick=agregarCarrito(${item.id}) class="btn ${item.stock ? 'btn-primary' : 'btn-secondary'}" ${!item.stock ? 'disabled' : '' } >Quiero este trekking</button>
+            </div>
+        </div>
+    `);
+};
 
+const getRow = (item) => {
+    return(
+        `
+    <tr>
+        <th scope="row">${item.id}</th>
+        <td>${item.nombre}</td>
+        <td>${item.cantidad}</td>
+        <td>$${item.precio * item.cantidad} ($${item.precio})</td>
+        <td><img style="width:20px" src="${item.imagen}" alt="imagen"></td>
+    </tr>
+        `
+    )
+}
 
-class Trekking {
-    constructor(lugar, precio, kilometros) {
-        this.lugar  = lugar.toUpperCase ();
-        this.precio = parseFloat (precio);
-        this.kilometros = parseFloat (kilometros); 
+const cargarProductos = (datos, nodo, esTabla) => {
+    let acumulador = "";
+    datos.forEach((el) => {
+        acumulador += esTabla ? getRow(el) : getCard(el);
+    })
+    nodo.innerHTML = acumulador;
+};
+
+const agregarCarrito = (id) => {
+    const seleccion = salidas.find(item => item.id === id);
+    const busqueda = carrito.findIndex(el => el.id === id);
+    
+    if (busqueda === -1) {
+        carrito.push({
+            id: seleccion.id,
+            nombre: seleccion.nombre,
+            precio: seleccion.precio,
+            cantidad: 1,
+            imagen: seleccion.imagen,
+        })
+    } else {
+        carrito[busqueda].cantidad = carrito[busqueda].cantidad + 1
     }
     
-    sumaAssistCard (seguro) {
-        this.precio = this.precio + 2500;
-    }
+    cargarProductos(carrito, tablaCarrito, true);
 }
 
-const trekkings = [];
-
-trekkings.push(new Trekking ("Refugio Frey", "10000", "10"));
-trekkings.push(new Trekking ("Refugio Laguna Negra", "15000", "14" ));
-trekkings.push(new Trekking ("Refugio Otto Meiling", "12000", "13"));
-trekkings.push(new Trekking ("Refugio Cerro Lopez", "7000", "4"));
-
-for (const trekking of trekkings) {
-    trekking.sumaAssistCard();
-}
-
-
-// Orden de precios de Trekking de manera ascendente:
-
-
-trekkings.sort ((a, b) => {
-    if (a.precio > b.precio) {
-        return 1;
-    }
-    if (a.precio < b.precio) {
-        return -1;
-    }
-    return 0;
-}) 
-
-for (const trekking of trekkings) {
-    console.log(trekking);
-}
-
-
-// Calculo del monto total del Trekking:
-
-
-const montoTotalTrekking = trekkings.reduce((acumulador,elemento) => acumulador + elemento.precio, 0);
-
-console.log("El monto total de los trekkings es:\n$" + montoTotalTrekking );
-
-
-// Busqueda del trekking más económico
-
-
-
-const trekkingPrecios = trekkings.map((elemento) => elemento.precio);
-
-console.log(trekkingPrecios);
-
-console.log("El trekking más económico es:\n" + Math.min (...trekkingPrecios));
-
-
-// Array de ingreso de integrantes para un trekking hasta llegar a 5 personas cupo máximo
-
-
-const integrantes = [];
-let cantidadIntegrantes = 5;
-
-do {
-    let ingresoIntegrante = prompt("Ingresá nombre y apellido");
-    integrantes.push(ingresoIntegrante.toUpperCase());
-    console.log(`Quedan ${cantidadIntegrantes - integrantes.length} cupos disponibles`);
-
-}while(integrantes.length != cantidadIntegrantes)
-
-alert(`Los integrantes del trekking son:\n${integrantes.join("\n")}\nYa no tenemos más cupo para este trekking`);
+cargarProductos(salidas, contenedor, false);

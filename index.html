@@ -7,69 +7,66 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;1,200&family=Roboto:wght@300&display=swap" rel="stylesheet">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <script src="https://kit.fontawesome.com/2dd8aefea8.js" crossorigin="anonymous"></script>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <link rel="stylesheet" href="./style.css">
-        <title>Desafio</title>
+        <title>Desafio incorporar eventos</title>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/2dd8aefea8.js" crossorigin="anonymous"></script>
+        <script src="./entrega.js" defer></script>
     </head>
 
     <body>
-        <div>
-            <header class="header">
-                <nav>
-                    <ul class="nav-center-section">
-                        <li>
-                            <a href="">Salidas</a>
-                        </li>
-                        <li>
-                            <a href="">Precios</a>
-                        </li>
-                        <li>
-                            <a href="">Contacto</a>
-                        </li>
-                        
-                    </ul>
-                </nav>
-            </header>
-        </div>
+        <header class="header">
+            <nav>
+                <ul class="nav-center-section">
+                    <li>
+                        <a href="">Salidas</a>
+                    </li>
+                    <li>
+                        <a href="">Precios</a>
+                    </li>
+                    <li>
+                        <a href="">Contacto</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
 
         <main>
             <h1>Bienvenidos a Patagonia Trekking</h1>
-
             <p>Somos un grupo de guías de montaña que ofrecemos experiencias únicas de trekking en Patagonia</p>
 
             <section>
                 <div id="lugares"></div>
                 <div id="imagenElegida"></div>
             </section>
-            
 
             <div class="container">
                 <div id="salidas" class="d-flex row flex-wrap"></div>
-                
             </div>
             
             <div class="container row">    
-                <div class="offset-6 col-md-4">
+                <div class="offset-4 col">
                     <button type="button" class="btn btn-primary btn-comprar" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        comprar
+                        Reservar
                     </button>
                 </div>
             </div>
-        
+            
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
+                        
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">Comprar</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        
+                
                         <div class="modal-body">
                             <table class="table">
                                 <thead>
                                 <tr>
-                                    <th scope="col">id</th>
+                                    <th scope="col">ID</th>
                                     <th scope="col">Lugar</th>
                                     <th scope="col">Cantidad</th>
                                     <th scope="col">Precio</th>
@@ -87,21 +84,47 @@
                     </div>
                 </div>
             </div>
-
-            <section class="newsletter">
-                <h3>¡Sigamos en contacto desde nuestro Newsletter!</h3>
-                <form action="">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" placeholder="ingresá tu mail"> 
-                    <input type="submit" value="Enviar"/>
-                </form>
+                        
+            <section class="formularioInfo">
+                <h3>¿Necesitás más información? ¡Escribinos!</h3>
             </section>
+
+            <div class="container">
+                <form action="">
+
+                    <div class="input-group">
+                        <input type="text" placeholder="Ingresá tu nombre" id="contact-name" onkeyup="validateName()">
+                        <span id="name-error"></span>
+                    </div>
+        
+                    <div class="input-group">
+                        <input type="tel" placeholder="Ingresá tu teléfono" id="contact-phone" onkeyup="validatePhone()">
+                        <span id="phone-error" ></span>
+                    </div>
+        
+                    <div class="input-group">
+                        <input type="email" placeholder="Ingresá tu Email" id="contact-email" onkeyup="validateEmail()">
+                        <span id="email-error"></span>
+                    </div>
+        
+                    <div class="input-group">
+                        <textarea rows="5" placeholder="Ingresá un comentario"></textarea>
+                    </div>
+        
+                    <button onclick="return validateForm()">Enviar</button>
+
+                    <span id="submit-error"></span>
+                    <span id="submit-success"></span>
+
+                </form>
+            </div>
         </main>
-                    
+
         <footer>
             <section class="footer contacto">
                 <p>Patagonia Trekking</p>
                 <p>Copyright PatagoniaTrekking® 2022 | Todos los derechos reservados</p>
+
                 <div class="socialMedia">
                     <i  class="fa-brands fa-facebook" 
                     href="" target="_blank">
@@ -112,9 +135,6 @@
                 </div>
             </section>
         </footer>
-
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-        <script src="./entrega.js"></script>
-
+                
     </body>
 </html>

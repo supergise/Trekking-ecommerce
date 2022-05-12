@@ -31,6 +31,9 @@ const salidas = [
     }
 ];
 
+
+// Selector de Lugares
+
 let titulo = document.createElement("h3");
 titulo.innerText = "Estos son nuestros próximos Trekkings";
 document.getElementById("lugares").appendChild(titulo);
@@ -41,7 +44,7 @@ select.onchange = (i) => {
     document.getElementById("imagenElegida").replaceChildren();
     let imagen = document.createElement("img");
     imagen.src = i.target.value;
-    document.getElementById("imagenElegida").append(imagen);
+    document.getElementById("imagenElegida").appendChild(imagen);
 } 
 select.innerHTML += `<option>Seleccione una opcion</option>`;
 for (let index = 0; index < salidas.length; index++) {
@@ -49,14 +52,15 @@ for (let index = 0; index < salidas.length; index++) {
 }
 document.getElementById("lugares").appendChild(select);
 
+// Cards de reservas
+
 const contenedor = document.getElementById("salidas");
 const tablaCarrito = document.getElementById("tablaCarrito");
 const carrito = [];
 
 const getCard = (item) => {
     return (
-        `
-        <div class="card" style="width: 20rem;">
+        `<div class="card" style="width: 20rem;">
             <img src="${item.imagen}" class="card-img-top" alt="${item.nombre}">
             <div class="card-body">
                 <h5 class="card-title">${item.nombre}</h5>
@@ -110,3 +114,71 @@ const agregarCarrito = (id) => {
 }
 
 cargarProductos(salidas, contenedor, false);
+
+
+//Validaciones para el formulario de registro
+
+const nameError = document.getElementById(`name-error`);
+const phoneError = document.getElementById(`phone-error`);
+const emailError = document.getElementById(`email-error`);
+const submitError = document.getElementById(`submit-error`);
+const submitSuccess = document.getElementById(`submit-success`);
+
+function validateName() {
+    const name = document.getElementById(`contact-name`).value;
+    if(name.length == 0){
+        nameError.innerHTML = `El nombre es requerido`;
+        return false;
+    }
+    if(!name.match(/^[A-Za-z]{3}/)){
+        nameError.innerHTML = `Escribí tu nombre`;
+        return false;
+    }
+    nameError.innerHTML = `<i class="fa-solid fa-circle-check"></i>`;
+    return true;
+}
+
+function validatePhone() {
+    const phone = document.getElementById(`contact-phone`).value;
+    if(phone.length == 0){
+        phoneError.innerHTML = `El teléfono es requerido`;
+        return false;
+    }
+    if(phone.length < 8){
+        phoneError.innerHTML = `El teléfono tiene que tener más de 8 dígitos`;
+        return false;
+    }
+    if(!phone.match(/^[0-9]+$/)){
+        phoneError.innerHTML = `El teléfono debe tener solamente números`;
+        return false
+    }
+    phoneError.innerHTML = `<i class="fa-solid fa-circle-check"></i>`;
+    return true
+}
+
+function validateEmail() {
+    const email = document.getElementById(`contact-email`).value;
+    if(email.length == 0){
+        emailError.innerHTML = `El E-mail es requerido`;
+        return false;
+    }
+    if(!email.match(/^[A-Za-z\._\-0-9]*[@][A-Za-z]*[\.][a-z]{2,4}$/)){
+        emailError.innerHTML =  `El Email es inválido`;
+        return false;
+    }
+    emailError.innerHTML = `<i class="fa-solid fa-circle-check"></i>`;
+    return true;
+}
+
+function validateForm(){
+    if(!validateName() || !validatePhone() || !validateEmail()){
+        submitError.style.display = `block`;
+        submitError.innerHTML = `Por favor revisar los campos`;
+        setTimeout(function(){submitError.style.display = `none`;}, 4000);
+        return false;
+    }
+    submitSuccess.style.display = `block`;
+    submitSuccess.innerHTML = `Su consulta fue enviada exitosamente`;
+    setTimeout(function(){submitSuccess.style.display = `none`;}, 4000);
+    return true;
+}

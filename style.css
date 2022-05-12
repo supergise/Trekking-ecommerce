@@ -32,7 +32,7 @@ nav ul li {
 
 .nav-center-section a {
     text-decoration: none;
-    color: #787818; 
+    color: rgb(10, 10, 10); 
     font-size: 1.2rem;
     font-weight: 600;
 }
@@ -90,17 +90,96 @@ p {
 
 .btn-comprar {
     margin: 30px 0px;
+    background: #346c7b;
+    padding: 10px 30px;
+    border-radius: 4px;
+    border: none;
 }
 
-.newsletter {
+.btn-comprar:hover {
+    background:  #69705e;
+}
+
+.formularioInfo h3 {
     text-align: center;
-    padding: 30px 0px;
+    font-size: 1.4rem;
+    font-weight: 400;
+    padding: 20px 0px;
 }
 
-.newsletter h3 {
-    font-size: 1.2rem;
-    font-weight: 100;
-    padding: 10px;
+.container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container form {
+    width: 90%;
+    max-width: 500px;
+    padding: 50px 30px 20px;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 1px 10px rgba(0,0,0,0.5);
+    position: relative;
+}
+
+.input-group input, 
+.input-group textarea {
+    flex-basis: 90%;
+    background: transparent;
+    border: 0;
+    outline: 0;
+    padding: 15px 0;
+    border-bottom: 1px solid #999;
+    color: #333;
+    font-size: 1rem;
+}
+
+::placeholder {
+    font-size: 0.9rem;
+}
+
+form button,
+.btn-primary {
+    background: #346c7b;
+    color: #fff;
+    border-radius: 4px;
+    border: none;
+    padding: 10px 40px;
+    outline: 0;
+    cursor: pointer;
+    display: block;
+    margin: 30px auto 10px;
+}
+
+form button:hover,
+.btn-primary:hover {
+    background-color: #69705e;
+}
+
+.btn-primary:focus {
+    background: rgb(166, 131, 36);
+}
+
+.input-group span {
+    position: absolute;
+    bottom: 12px;
+    right: 17px;
+    font-size: 0.9rem;
+    color: red;
+}
+
+.input-group span i {
+    color: green;
+}
+
+#submit-error {
+    color: red;
+}
+
+#submit-success {
+    color: green;
 }
 
 .contacto {
@@ -108,4 +187,14 @@ p {
     font-size: 1rem;
     color:rgb(84, 83, 83);
     padding: 50px;
+}
+
+i {
+    font-size: 1.5rem;
+    padding-right: 10px;
+    color: #346c7b;
+}
+
+.card-img-top {
+    margin: 10px;
 }

@@ -6,7 +6,7 @@
 
 body {
     font-family: "Nunito", sans-serif;
-    color: #535252; 
+    color: #454444; 
 }
 
 .header {
@@ -37,6 +37,14 @@ nav ul li {
     font-weight: 600;
 }
 
+.nav-center-section a.btn-blanco {
+    color: #fff;
+    font-weight: 600;
+    background: rgba(128, 128, 128, 0.451);
+    border-radius: 5px;
+    padding: 5px;
+}
+
 h1 {
     width: 100%;
     text-align: center;
@@ -50,22 +58,21 @@ p {
     font-size: 1.1rem;
 }
 
+#lugares {
+    width: 500px;
+    background: #fff;
+    margin: 5% auto;
+    box-shadow: 0 0 10px 1px rgba(0,0,0,0.5);
+    border-radius: 4px;
+}
+
 #lugares h3 {
     width: 100%;
     text-align: center;
-    color: #fff;
-    padding: 30px 0px 30px 0px;
+    color: #454444;
+    padding: 30px 0px 10px 0px;
     font-weight: 400;
     font-size: 1.3rem;
-}
-
-#lugares {
-    width: 500px;
-    background: #346c7b;
-    margin: 5% auto;
-    padding: 0px 0;
-    color: #fff;
-    box-shadow: 0 0 10px 1px rgba(0,0,0,0.5);
 }
 
 #imagenElegida {
@@ -77,8 +84,8 @@ p {
 .lugaresTrekking {
     width: 90%;
     border: none;
-    background: #346c7b;
-    color: #fff;
+    background: #e2e6e7;
+    color: #454444;
     text-align: left;
     margin: 0px 0px 20px 30px;
 }
@@ -88,12 +95,40 @@ p {
     text-align: center;
 }
 
+.card-img-top {
+    margin-top: 15px;
+    
+}
+
+.card {
+    width: 20rem;
+    margin: 20px 2px;
+    background-color: white;
+    border: none;
+}
+
+.card p {
+    font-weight: 600;
+    color: #346c7b;
+}
+
+.fondo {
+    display: flex;
+    background: #e2e6e7;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0px 20px 0px;
+}
+
 .btn-comprar {
-    margin: 30px 0px;
     background: #346c7b;
-    padding: 10px 30px;
     border-radius: 4px;
     border: none;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
 }
 
 .btn-comprar:hover {
@@ -104,7 +139,7 @@ p {
     text-align: center;
     font-size: 1.4rem;
     font-weight: 400;
-    padding: 20px 0px;
+    padding: 50px 0px 20px 0px;
 }
 
 .container {
@@ -167,7 +202,7 @@ form button:hover,
     bottom: 12px;
     right: 17px;
     font-size: 0.9rem;
-    color: red;
+    color:  red;
 }
 
 .input-group span i {
@@ -179,7 +214,7 @@ form button:hover,
 }
 
 #submit-success {
-    color: green;
+    color:  green;
 }
 
 .contacto {
@@ -193,8 +228,4 @@ i {
     font-size: 1.5rem;
     padding-right: 10px;
     color: #346c7b;
-}
-
-.card-img-top {
-    margin: 10px;
 }

@@ -4,32 +4,33 @@ const contenedor = document.getElementById("salidas");
 const tablaCarrito = document.getElementById("tablaCarrito");
 let carrito = [];
 
-const getCard = (item) => {
+const getCard = ({id, nombre, precio, imagen}) => {
+    
     return (
-        `<div class="card">
-            <img src="${item.imagen}" class="card-img-top" alt="${item.nombre}">
+        `<div class="card"> 
+            <img src="${imagen}" class="card-img-top" alt="${nombre}">
             <div class="card-body">
-                <h5 class="card-title">${item.nombre}</h5>
-                <p class="card-text">$${item.precio}</p>
-                <button onclick=agregarCarrito(${item.id}) class="btn ${item.stock ? 'btn-primary' : 'btn-secondary'}" ${!item.stock ? 'disabled' : '' } >Quiero este trekking</button>
+                <h5 class="card-title">${nombre}</h5>
+                <p class="card-text">$${precio}</p>
+                <button onclick=agregarCarrito(${id}) class="btn  btn-primary }" } >Quiero este trekking</button>
             </div>
         </div>
     `);
 };
 
-const getRow = (item) => {
+const getRow = ({id, nombre, cantidad, precio, imagen}) => {
     return(
         `
         <tr>
-            <th scope="row">${item.id}</th>
-            <td>${item.nombre}</td>
-            <td>${item.cantidad}</td>
-            <td>$${item.precio * item.cantidad} ($${item.precio})</td>
-            <td><img style="width:20px" src="${item.imagen}" alt="imagen"></td>
-            <td><i class="fa-solid fa-trash" onclick="deleteCart(${item.id})"></i></th>
+            <th scope="row">${id}</th>
+            <td>${nombre}</td>
+            <td>${cantidad}</td>
+            <td>$${precio * cantidad} ($${precio})</td>
+            <td><img style="width:20px" src="${imagen}" alt="imagen"></td>
+            <td><i class="fa-solid fa-trash" onclick="deleteCart(${id})"></i></th>
         </tr>
         `
-    )
+    );
 }
 
 const deleteCart = (id) => {
@@ -57,9 +58,9 @@ const agregarCarrito = (id) => {
             precio: seleccion.precio,
             cantidad: 1,
             imagen: seleccion.imagen,
-        })
+        });
     } else {
-        carrito[busqueda].cantidad = carrito[busqueda].cantidad + 1
+        carrito[busqueda].cantidad = carrito[busqueda].cantidad + 1;
     }
 
     localStorage.setItem("carrito", JSON.stringify(carrito));

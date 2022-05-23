@@ -32,10 +32,10 @@ function validatePhone() {
     }
     if(!phone.match(/^[0-9]+$/)){
         phoneError.innerHTML = `El teléfono debe tener solamente números`;
-        return false
+        return false;
     }
     phoneError.innerHTML = `<i class="fa-solid fa-circle-check"></i>`;
-    return true
+    return true;
 }
 
 function validateEmail() {

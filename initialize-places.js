@@ -16,8 +16,8 @@ function inicializarLugares() {
             document.getElementById("imagenElegida").appendChild(imagen);
         }
     } 
-
-    select.innerHTML += `<option>Seleccione una opcion</option>`;
+    
+    select.innerHTML = `<option>Seleccione una opcion</option>`;
 
     for (let index = 0; index < salidas.length; index++) {
         select.innerHTML += `<option value="${salidas[index].imagen}">${salidas[index].nombre}</option>`;

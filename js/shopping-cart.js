@@ -34,9 +34,29 @@ const getRow = ({id, nombre, cantidad, precio, imagen}) => {
 }
 
 const deleteCart = (id) => {
-    carrito = carrito.filter((el) => el.id != id );
-    localStorage.setItem("carrito", JSON.stringify(carrito));
-    cargarProductos(carrito, tablaCarrito, true);
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: 'btn btn-success',
+            cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+    })
+
+    swalWithBootstrapButtons.fire({
+        title: "¿Está seguro de quitar este Trekking?",
+        text: "Podés volver a agregarlo cuando quieras",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: "Quitar Trekking",
+        cancelButtonText: "Dejar Trekking",
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            carrito = carrito.filter((el) => el.id != id );
+            localStorage.setItem("carrito", JSON.stringify(carrito));
+            cargarProductos(carrito, tablaCarrito, true);
+        } 
+    })
 }
 
 const cargarProductos = (datos, nodo, esTabla) => {

@@ -7,7 +7,9 @@ const salidas = [
         precio: 15000,
         stock: 5,
         imagen: "./pictures/refugiofrey.jpg",
-        info: "Altura: 1700mt. Dificultad: fácil. Trekking de 4hs",
+        altura: 1700,
+        dificultad: "baja",
+        cantHoras: 4,
         imageAlt: "Foto del Refugio Frey"
     },
     {
@@ -16,7 +18,9 @@ const salidas = [
         precio: 18000,
         stock: 3,
         imagen: "./pictures/refugiolaguna.jpg",
-        info: "Altura: 1600mt. Dificultad: media/alta. Trekking de 4 a 6hs",
+        altura: 1600,
+        dificultad: "media/alta",
+        cantHoras: 5,
         imageAlt: "Foto del Refugio Laguna Negra"
     },
     {
@@ -25,7 +29,9 @@ const salidas = [
         precio: 10000,
         stock: 1,
         imagen: "./pictures/refugiolopez.jpg",
-        info: "Altura: 1620mt. Dificultad: baja/media. Trekking de 3hs",
+        altura: 1620,
+        dificultad: "baja/media",
+        cantHoras: 3,
         imageAlt: "Foto del Refugio Lopez"
     },
     {
@@ -34,7 +40,9 @@ const salidas = [
         precio: 19000,
         stock: 1,
         imagen: "./pictures/refugiootto.jpg",
-        info: "Altura: 2000mt. Dificultad: media/alta. Trekking de 5hs",
+        altura: 2000,
+        dificultad: "media/alta",
+        cantHoras: 5,
         imageAlt: "Foto del Refugio Otto Meiling"
     }
 ];

@@ -10,20 +10,19 @@ function inicializarLugares() {
 
     select.onchange = (i) => {
         const infoTrekking = salidas.find(item => item.id == i.target.value);
-        console.log(infoTrekking);
+        const ficha = new Ficha (infoTrekking);
         if (infoTrekking) {
-
             Swal.fire({
-                title: infoTrekking.nombre,
-                text: infoTrekking.info,
-                imageUrl: infoTrekking.imagen,
+                title: ficha.nombre,
+                text: ficha.getInfo(),
+                imageUrl: ficha.imagen,
                 imageWidth: 400,
                 imageHeight: 400,
                 imageAlt: '',
             })
         }
     } 
-    
+
     select.innerHTML = "<option>Seleccione una opcion</option>";
 
     for (let index = 0; index < salidas.length; index++) {

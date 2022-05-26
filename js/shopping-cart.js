@@ -1,5 +1,22 @@
 // Cards de reservas
 
+class Ficha {
+    constructor({id, nombre, precio, stock, imagen, altura, dificultad, cantHoras, imageAlt}) {
+        this.id = id; 
+        this.nombre = nombre;
+        this.precio = parseFloat(precio);
+        this.stock = stock;
+        this.imagen = imagen;
+        this.altura = altura;
+        this.dificultad = dificultad;
+        this.cantHoras = cantHoras;
+        this.imageAlt = imageAlt;
+    }
+    getInfo() {
+        return `El ${this.nombre} se encuentra a una altura de ${this.altura} mt y tiene una dificultad ${this.dificultad} y una duración de ${this.cantHoras} horas.`;
+    }
+}
+
 const contenedor = document.getElementById("salidas");
 const tablaCarrito = document.getElementById("tablaCarrito");
 let carrito = [];

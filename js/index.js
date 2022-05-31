@@ -1,54 +1,18 @@
 // Principal
 
-const salidas = [
-    {
-        id: 1,
-        nombre: "Refugio Frey",
-        precio: 15000,
-        stock: 5,
-        imagen: "./pictures/refugiofrey.jpg",
-        altura: 1700,
-        dificultad: "baja",
-        cantHoras: 4,
-        imageAlt: "Foto del Refugio Frey"
-    },
-    {
-        id: 2,
-        nombre: "Refugio Laguna Negra",
-        precio: 18000,
-        stock: 3,
-        imagen: "./pictures/refugiolaguna.jpg",
-        altura: 1600,
-        dificultad: "media/alta",
-        cantHoras: 5,
-        imageAlt: "Foto del Refugio Laguna Negra"
-    },
-    {
-        id: 3,
-        nombre: "Refugio Lopez",
-        precio: 10000,
-        stock: 1,
-        imagen: "./pictures/refugiolopez.jpg",
-        altura: 1620,
-        dificultad: "baja/media",
-        cantHoras: 3,
-        imageAlt: "Foto del Refugio Lopez"
-    },
-    {
-        id: 4,
-        nombre: "Refugio Otto Meiling",
-        precio: 19000,
-        stock: 1,
-        imagen: "./pictures/refugiootto.jpg",
-        altura: 2000,
-        dificultad: "media/alta",
-        cantHoras: 5,
-        imageAlt: "Foto del Refugio Otto Meiling"
-    }
-];
+let salidas = [];
 
-inicializarLugares();
+const traerTrekkings = async () => {
 
-cargarProductos(salidas, contenedor, false);
+    let response = await fetch("./api.json");
 
-inicializarCarrito();
+    salidas = await response.json();
+
+    inicializarLugares();
+    
+    cargarProductos(salidas, contenedor, false);
+    
+    inicializarCarrito();
+}
+
+traerTrekkings();
